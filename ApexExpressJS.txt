@@ -1,0 +1,18 @@
+Express & Nodejs:-
+=================
+Java Script	v|s	PHP/ASP/Python
+Here we do all 
+things like
+we can do 
+====================
+Enginee Spedermonkey
+Interpreture/Compliler
+v8
+JS
+====================
+1: npm install express-generator -g
+2: express
+3: npm start
+4: npm run start
+=====================
+

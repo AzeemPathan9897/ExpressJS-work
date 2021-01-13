@@ -1,0 +1,168 @@
+//////////////what is express js/////////////
+
+We can say an expressjs that is framework of nodejs and designed for building single-page,
+multi-page, and hybrid web app.
+
+////////////////////how to install express js///////////
+
+npm install express
+
+......................................................
+//////if we wanna auto-refresh our servers then///////  
+......................................................
+
+  npm i -g nodemon
+
+
+==============================================================================
+                        index.html  //calculator.html ka code h isme
+==============================================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>calculator</title>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+	<style>
+		*{
+			font-family: 'Josefin Sans', sans-serif;
+		}
+        div{ height: 100vh; display: flex; justify-content: center; align-items: center;
+               flex-direction: column; text-align:center; }
+
+	</style>
+</head>
+<body>
+	 
+       <div class="centerdiv">
+
+           <h1>simple calculator</h1>
+           <br>
+           <form method="post" >  
+           	  
+           	     <input type="text" name="v1" placeholder="enter ur no.">
+           	     <br>
+           	     <input type="text" name="v2" placeholder="enter ur no.">
+                 <br>
+                 <button type="submit">calculate</button>
+           </form>
+
+       </div>
+
+</body>
+</html>
+
+==============================================================================
+                        bmi.html
+==============================================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BMI Calculator</title>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+	<style>
+		*{
+			font-family: 'Josefin Sans', sans-serif;
+		}
+        div{ height: 100vh; display: flex; justify-content: center; align-items: center;
+               flex-direction: column; text-align:center; }
+
+	</style>
+</head>
+<body>
+	 
+       <div class="centerdiv">
+
+           <h1>BMI calculator</h1>
+           <br>
+           <form method="post" >  
+           	  
+           	     <input type="text" name="weight" placeholder="weight">
+           	     <br>
+           	     <input type="text" name="height" placeholder="height">
+                 <br>
+                 <button type="submit">calculate</button>
+           </form>
+
+       </div>
+
+</body>
+</html>
+
+=====================================================================
+                     expserver.js
+=====================================================================
+
+const express = require("express");
+const bodyParser = require("body-parser");  //import becz extarcting/parsing data from another file.
+
+
+const app = express();  //it's an app/web create by maker, mandatory v call express() for app.  
+
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.get("/", (req, res)=>{  //anyone search 3000 | "/", then i wanna "res" to user.
+    
+     res.send("wlcm to my channel about :) ");  //res.send it's method of nodejs|express   
+});
+app.get("/about", (req, res)=>{ 
+
+     res.send("<h1> wlcm to my channel about :)  </h1>");
+});
+          
+app.get("/contact", (req, res)=>{ 
+
+     res.send("wlcm to my channel contact :) ");
+});
+
+
+                     // Calculator
+
+
+app.get("/calculator", (req, res)=>{
+	// console.log(__dirname);
+	res.sendFile(__dirname + "/index.html");  //__dirname used for proper path 
+});            
+
+app.post("/calculator", (req, res)=>{
+	
+    let n1 = Number(req.body.v1);    //Number add for removing req data on text format.
+    let n2 = Number(req.body.v2);
+
+    let sum = n1 + n2;
+
+    res.send("the sum of two digits : " +sum );
+    // res.send("thx 4  ur  lovely post");
+     console.log(req.body);         //req show on cmd
+});
+
+
+                // BMI_Calculator
+
+
+
+app.get("/bmi", (req, res)=>{
+  // console.log(__dirname);
+  res.sendFile(__dirname + "/bmi.html");  //__dirname used for proper path 
+});            
+
+app.post("/bmi", (req, res)=>{
+    let w1 = Number(req.body.weight);
+    let h1 = Number(req.body.weight);
+
+    let bmi = w1 / (h1*h1);
+
+    res.send("the bmi of ur body is :" +bmi );
+});
+   
+app.listen(3000, (req, res)=>{
+    console.log("server is running at port:3000");
+});
+
+
+
